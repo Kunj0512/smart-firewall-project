@@ -1,78 +1,160 @@
-# Smart Firewall Rule Recommendation System 🔥🛡️
+ 🔥 Smart Firewall Rule Recommendation System  
+Machine Learning–Driven Firewall Rule Generator with Streamlit UI
 
-This project uses machine learning to analyze network log data and automatically recommend firewall rules that can help secure your system by filtering potentially malicious traffic.
+📌 Overview
 
----
+The Smart Firewall Rule Recommendation System is a machine-learning–based application designed to analyze network logs and automatically **recommend firewall rules** that help block or allow traffic based on learned patterns.
 
-## 📌 Features
-- Parses and processes network log files (CSV format)
-- Trains a machine learning model to detect patterns in network activity
-- Recommends firewall rules based on new input logs
-- Interactive web interface using Streamlit
-- Includes feedback mechanism to improve rule accuracy over time
+This project supports:
+- Uploading network log files (CSV format)
+- Cleaning & preprocessing network traffic data
+- Training a Decision Tree Classifier
+- Predicting ALLOW/BLOCK decisions based on port behavior
+- Automatically generating structured firewall rule objects
+- Downloading rules as JSON
+- Saving user feedback for continuous improvement
+- A fully interactive **Streamlit UI**
 
----
-
-## 🧠 Technologies Used
-- Python 3.x
-- pandas, scikit-learn, joblib
-- Streamlit (for UI)
-- Git for version control
+This project was developed as part of an **Applied Cybersecurity / Software Engineering Project**.
 
 ---
 
-## 📁 Project Structure
-```
-├── data/               # Sample network logs
-├── outputs/            # Generated models or rules
-├── src/                # Core Python logic
-├── test_cases/         # Placeholder for testing
-├── ui/                 # Streamlit app
-├── README.md
-└── requirements.txt
-```
+ 🚀 Features
+
+🔍 1. Log Ingestion & Preprocessing
+- Reads CSV network logs  
+- Drops missing values  
+- Generates labels (`ALLOW` → 1, `BLOCK` → 0)
+
+🤖 2. Machine Learning Engine
+- Decision Tree classifier (scikit-learn)  
+- Trained on port-based traffic classification  
+- Saves and loads model using `joblib`
+
+🛡️ 3. Intelligent Rule Generation
+Given a port number, the system:
+- Predicts whether traffic should be **allowed** or **blocked**
+- Generates a structured firewall rule object containing:
+  - Source IP
+  - Destination IP
+  - Protocol
+  - Port
+  - Action (ALLOW/BLOCK)
+  - Recommendation description
+
+🖥️ 4. Streamlit Frontend
+The UI supports:
+- Upload logs  
+- Preview data  
+- Train model  
+- Enter port number  
+- Generate & download rule  
+- Submit feedback  
+
+📝 5. Feedback System
+- User comments stored in `outputs/feedback.json`  
+- Enables future model refinement
 
 ---
 
-## 🚀 Getting Started
+🏗️ Project Structure
+smart-firewall-project/
+├─ data/
+│ └─ network_logs.csv
+├─ models/
+│ └─ decision_tree.pkl
+├─ outputs/
+│ └─ feedback.json
+├─ src/
+│ ├─ preprocess.py
+│ ├─ train_model.py
+│ ├─ recommend_rules.py
+│ └─ feedback.py
+├─ ui/
+│ └─ app.py
+├─ test_cases/
+├─ requirements.txt
+├─ README.md
+└─ .gitignore
 
-### 1. Clone the Repo
-```bash
-git clone https://github.com/YOUR_USERNAME/smart-firewall-rule-system.git
-cd smart-firewall-rule-system
-```
 
-### 2. Install Dependencies
-```bash
+---
+
+⚙️ Installation & Setup 
+
+1️⃣ Clone the Repository 
+bash 
+git clone https://github.com/Kunj0512/smart-firewall-project.git
+cd smart-firewall-project
+
+3️⃣ Install Dependencies
+bash
 pip install -r requirements.txt
-```
 
-### 3. Run the Streamlit App
-```bash
+▶️ Running the Application
+bash
+Start the Streamlit Application
 streamlit run ui/app.py
-```
 
-### 4. Upload Log File
-- Use the `network_logs.csv` file in `data/` as a test input.
-- The app will suggest firewall rules based on the log content.
+Using the App
 
----
+Upload a network_logs.csv file
 
-## 🎥 Walkthrough Video
-> [Watch on YouTube](https://youtube.com/YOUR_VIDEO_LINK)  
-> *(Max 10 min, shows code and app demo)*
+Preview logs
 
----
+Train the model
 
-## 💬 Feedback & Improvements
-You can retrain the model using `train_model.py` and submit feedback via the UI, helping improve rule accuracy over time.
+Enter a port number
 
----
+Generate the recommended firewall rule
 
-## 🧪 Test Cases
-You can add test logs to the `test_cases/` folder for batch evaluation of rule quality.
+Download rule as JSON
 
----
+Provide feedback (optional)
 
-## 📜 License
-MIT License - feel free to use and modify with credit.
+📘 Example Rule Output
+JSON
+{
+  "source": "any",
+  "destination": "any",
+  "protocol": "TCP",
+  "port": 22,
+  "action": "BLOCK",
+  "description": "Traffic on port 22 should be blocked based on model prediction."
+}
+
+🧪 Testing (Optional)
+
+If tests are added in future:
+
+pytest
+
+🎥 Video Walkthrough (Add Link)
+
+A full project walkthrough video will be added here:
+
+https://youtu.be/<your-video-link>
+
+🧠 Future Improvements
+
+Add multi-feature ML training (source IP, protocol, packet size)
+
+Upgrade ML model (Random Forest, XGBoost)
+
+Add analytics dashboard
+
+Integrate with pfSense, iptables, Azure NSG APIs
+
+Add role-based access control (RBAC)
+
+📄 License
+
+This project is licensed under the MIT License.
+You may use, modify, and distribute this project with attribution.
+
+👤 Author
+
+Kunj Trivedi
+GitHub: @Kunj0512
+
+Project: Smart Firewall Rule Recommendation System (2024–2025)
